@@ -15,8 +15,3 @@
 
 ### ความต้องการระบบ (Prerequisites)
 * Python 3.x ขึ้นไป
-
-### การรันโปรแกรม (Running)
-1. โคลนโปรเจกต์หรือดาวน์โหลดไฟล์ไปไว้ในเครื่อง
-   ```bash
-   git clone [https://github.com/ช](https://github.com/ช)ื่อผู้ใช้ของคุณ/ชื่อเรโป.git
