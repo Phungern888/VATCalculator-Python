@@ -19,4 +19,4 @@
 ### การรันโปรแกรม (Running)
 1. โคลนโปรเจกต์หรือดาวน์โหลดไฟล์ไปไว้ในเครื่อง
    ```bash
-   git clone [https://github.com/ช] (https://github.com/Phungern888/VATCalculator-Python/blob/main/VATCalculator-Ptyhon)
+   git clone [https://github.com] (https://github.com/Phungern888/VATCalculator-Python/blob/main/VATCalculator-Ptyhon)
