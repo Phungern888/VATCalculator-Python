@@ -1,0 +1,55 @@
+print("แอปคำนวณภาษีรายได้สำหรับประเทศไทย")
+print("------------------------------")
+
+# ฟังก์ชันที่ 1: คำนวณรายได้สุทธิ (หักค่าใช้จ่ายและค่าลดหย่อนส่วนตัว)
+def calculateNetIncome(gross_income):
+    # หักค่าใช้จ่าย 50% แต่ไม่เกิน 100,000 บาท
+    expense_deduction = min(gross_income * 0.5, 100000)
+    
+    # หักค่าลดหย่อนส่วนตัว 60,000 บาท
+    personal_allowance = 60000
+    
+    # คำนวณรายได้สุทธิ
+    net_income = gross_income - expense_deduction - personal_allowance
+    
+    # รายได้สุทธิต้องไม่ติดลบ (ถ้าหักแล้วติดลบ ให้เป็น 0)
+    return max(net_income, 0)
+
+
+# ฟังก์ชันที่ 2: คำนวณภาษีตามขั้นบันได (จากรายได้สุทธิ)
+def calculateTax(income):
+    brackets = [
+        (150000, 0.00),   # 0 - 150,000 (0%)
+        (300000, 0.05),   # 150,001 - 300,000 (5%)
+        (500000, 0.10),   # 300,001 - 500,000 (10%)
+        (750000, 0.15),   # 500,001 - 750,000 (15%)
+        (1000000, 0.20),  # 750,001 - 1,000,000 (20%)
+        (2000000, 0.25),  # 1,000,001 - 2,000,000 (25%)
+        (5000000, 0.30),  # 2,000,001 - 5,000,000 (30%)
+        (float('inf'), 0.35) # มากกว่า 5,000,000 ขึ้นไป (35%)
+    ]
+    
+    tax = 0
+    previous_limit = 0
+    
+    for limit, rate in brackets:
+        if income > previous_limit:
+            taxable_amount = min(income, limit) - previous_limit
+            tax += taxable_amount * rate
+            previous_limit = limit
+        else:
+            break
+            
+    return tax
+
+
+# --- ส่วนการทำงานหลักของโปรแกรม ---
+TotalIncome = float(input("ใส่จำนวนรายได้รวมต่อปี (ก่อนหักค่าใช้จ่าย) : "))
+
+# เรียกใช้ฟังก์ชันที่ 1 หาเงินได้สุทธิ
+net_income = calculateNetIncome(TotalIncome)
+print(f"รายได้สุทธิหลังหักค่าใช้จ่ายและลดหย่อน: {net_income:,.2f} บาท")
+
+# เรียกใช้ฟังก์ชันที่ 2 หาภาษีที่ต้องจ่าย
+total_tax = calculateTax(net_income)
+print(f"ภาษีที่ต้องชำระทั้งหมด: {total_tax:,.2f} บาท")
